@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       function Set(){
+        this.item={};
+
+
+        Set.prototype.add=function(vlaue){
+        if(this.has(vlaue)){
+            return false;
+        }else{
+            this.item[vlaue] = vlaue;
+            return true;
+        }
+       };
+
+       Set.prototype.has = function(vlaue){
+        return this.item.hasOwnProperty(vlaue);
+       };
+
+       Set.prototype.remove = function(vlaue){
+        if(this.has(vlaue)){
+            delete this.item[vlaue];
+        }else{
+            return false;
+        }
+       };
+
+       Set.prototype.clear = function(){
+        this.item = {};
+       };
+
+       Set.prototype.size = function(vlaue){
+        return Object.keys(this.item).length;
+       }
+
+       Set.prototype.values = function(vlaue){
+        return Object.keys(this.item);
+       }
+       }
+
+
+       let sets = new Set();
+
+       sets.add('a');
+    //    sets.clear();
+    //    sets.remove('b');
+       console.log(sets.item,sets.size(),sets.values());
+    </script>
+</body>
+</html>

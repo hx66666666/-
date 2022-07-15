@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function Stack() {
+            this.array = [];
+            //添加一个新元素到栈顶
+            this.push = function (element) {
+                return this.array.push(element);
+            };
+
+            //删除一个栈顶元素
+            this.pop = () => {
+                this.array.pop();
+            };
+
+            //返回栈顶元素
+            this.peek = () => {
+                if (this.array.length) {
+                    return this.array[this.array.length - 1];
+                };
+            };
+
+            //判断栈是否为空
+            this.isEmpty = () => {
+                if (this.array.length) {
+                    return 1;
+                } else {
+                    return 0;
+                };
+            };
+
+            //栈的元素个数
+            this.size = () => {
+                return this.array.length;
+            };
+
+            //返回字符
+            let s = '';
+            this.toString = () => {
+                for (let i = 0; i <= this.array.length - 1; i++) {
+                    s += this.array[i];
+                };
+                return s;
+            };
+        };
+
+        // var s1 = new Stack();
+        // let b = prompt();
+        // b = Number(b);
+        // console.log(typeof b);
+        // while (1) {
+        //     s1.push(b % 2);
+        //     b = Math.floor(b / 2);
+        //     if (b <= 0) {
+        //         break;
+        //     };
+        // }
+        // // console.log(s1.toString());
+
+        // let str = '';
+        // while (s1.isEmpty()) {
+        //     str += '' + s1.peek();
+        //     s1.pop();
+        // };
+        // console.log(str);
+
+
+
+
+        //十进制转换为二进制，先将每个二进制代码进栈，然后出栈
+        function dec2bin(b) {
+            var s1 = new Stack();
+            b = Number(b);
+            console.log(typeof b);
+            while (1) {
+                s1.push(b % 2);
+                b = Math.floor(b / 2);
+                if (b <= 0) {
+                    break;
+                };
+            }
+            // console.log(s1.toString());
+
+            let str = '';
+            while (s1.isEmpty()) {
+                str += '' + s1.peek();
+                s1.pop();
+            };
+            console.log(str);
+        };
+        let b = prompt();
+        dec2bin(b);
+
+    </script>
+</body>
+
+</html>

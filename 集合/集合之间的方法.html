@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       function Set(){
+        this.item={};
+
+        Set.prototype.add=function(vlaue){
+        if(this.has(vlaue)){
+            return false;
+        }else{
+            this.item[vlaue] = vlaue;
+            return true;
+        }
+       };
+
+       Set.prototype.has = function(vlaue){
+        return this.item.hasOwnProperty(vlaue);
+       };
+
+       Set.prototype.remove = function(vlaue){
+        if(this.has(vlaue)){
+            delete this.item[vlaue];
+        }else{
+            return false;
+        }
+       };
+
+       Set.prototype.clear = function(){
+        this.item = {};
+       };
+
+       Set.prototype.size = function(vlaue){
+        return Object.keys(this.item).length;
+       }
+
+       Set.prototype.values = function(vlaue){
+        return Object.keys(this.item);
+       }
+
+       //差集
+       Set.prototype.difference = function(s2){
+        let difference1 = new Set();
+        Object.keys(s2).forEach((item)=>{
+            if(!this.has(item)){
+                difference1.add(item);
+            }
+        });
+        return difference1.item;
+       }
+
+       //子集
+       Set.prototype.subset = function(s2){
+        let subset1 = new Set();
+        let flag = 1;
+        Object.keys(s2).forEach((item)=>{
+            if(!this.has(item)){
+                flag = 0;
+            }
+        })
+
+        if(flag==1){
+            Object.keys(s2).forEach((item)=>{
+            subset1.add(item);
+        })
+        }
+        return subset1.item;
+       }
+       }
+
+       let set1 = new Set();
+       set1.add('a');
+       set1.add('b');
+       set1.add('c');
+       set1.add('d');
+       set1.add('e');
+       set1.add('f');
+
+
+       let set2 = new Set();
+       set2.add('c');
+       set2.add('d');
+       set2.add('e');
+       set2.add('f');
+    //    set2.add('g');
+    //    set2.add('h');
+
+       //差集
+       console.log(set1.difference(set2.item));
+       console.log(set1.subset(set2.item));
+
+
+
+    //    //并集
+    //    function union(){
+    //     this.item ={};
+    //     union.prototype.add = function(s1,s2){
+    //         Object.keys(s1).forEach((item)=>{
+    //             this.item[item]=item;
+    //         })
+    //         Object.keys(s2).forEach((item)=>{
+    //             if(!this.item.hasOwnProperty(item)){
+    //                 this.item[item] = item;
+    //             }
+    //         });
+    //     }
+    //    };
+
+    // let union1  = new union();
+    //    union1.add(set1.item,set2.item);
+    //    console.log(union1.item);
+
+
+    //    //交集
+    //    function intersection(){
+    //     this.item={};
+    //     intersection.prototype.add = function(s1,s2){
+    //         Object.keys(s1).forEach((item)=>{
+
+    //             Object.keys(s2).forEach((item1)=>{
+    //             if(item == item1){
+    //                 this.item[item1]= item1;
+    //             }
+    //         });
+
+    //         });
+    //     }
+    //    }
+
+    //    let intersection1 = new intersection();
+    //    intersection1.add(set1.item,set2.item);
+    //    console.log(intersection1.item);
+    </script>
+</body>
+</html>

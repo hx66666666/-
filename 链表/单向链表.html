@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(data) {
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class LinkList {
+            constructor() {
+                this.head = null;
+                this.length = 0;
+            }
+            append(data) {
+                if (this.length == 0) {
+                    let newnode = new Node(data);
+                    this.head = newnode;
+                } else {
+                    let newnode = new Node(data);
+                    let flag = this.head;
+                    while (flag.next) {
+                        flag = flag.next;
+                    }
+                    flag.next = newnode;
+                }
+                this.length++;
+            }
+
+            insert(position, data) {
+                let newnode = new Node(data);
+                let flag = this.head;
+                if (position == 1) {
+                    newnode.next = this.head;
+                    this.head = newnode;
+                    this.length++;
+                } else {
+                    for (let i = 1; i < position - 1; i++) {
+                        flag = flag.next;
+                    }
+                    newnode.next = flag.next;
+                    flag.next = newnode;
+                    this.length++;
+                }
+            }
+
+            get(position) {
+                let flag = this.head;
+                if (position == 1) {
+                    return flag;
+                } else {
+                    for (let i = 1; i < position; i++) {
+                        flag = flag.next;
+                    }
+                    return flag;
+                }
+            }
+
+            indexof(data) {
+                let flag = this.head;
+                if (this.head.data == data) {
+                    return 1;
+                } else {
+                    for (let i = 1; i < this.length; i++) {
+                        flag = flag.next;
+                        if (flag.data == data) {
+                            return i + 1;
+                            break;
+                        }
+                    }
+                    return -1;
+                }
+            }
+
+            updata(position, data) {
+                let flag = this.head;
+                if (position == 1) {
+                    flag.data = data;
+                } else {
+                    for (let i = 1; i < position; i++) {
+                        flag = flag.next;
+                    }
+                    flag.data = data;
+                }
+            }
+
+            removeAt(position) {
+                let flag = this.head;
+                if (position == 1) {
+                    this.head = flag.next;
+                    this.length--;
+                } else {
+                    for (let i = 1; i < position - 1; i++) {
+                        flag = flag.next;
+                    }
+                    flag.next = flag.next.next;
+                    this.length--;
+                }
+            }
+
+            remove(data) {
+                let flag = this.head;
+                if (this.head.data == data) {
+                    this.head = flag.next;
+                    this.length--;
+                } else {
+                    for (let i = 1; i <= this.length; i++) {
+                        flag = flag.next;
+                        if (flag.next.data == data) {
+                            flag.next = flag.next.next;
+                            this.length--;
+                            break;
+                        }
+                    }
+                }
+            }
+
+            isEnpty() {
+                if (this.length == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+            size() {
+                return this.length;
+            }
+
+            toString() {
+                let flag = this.head;
+                let str = '' + flag.data;
+                for (let i = 0; i < this.length - 1; i++) {
+                    flag = flag.next;
+                    str += flag.data;
+                }
+                return str;
+            }
+        }
+        let linklist = new LinkList;
+        linklist.append(2);
+        linklist.append(3);
+        linklist.append(4);
+        linklist.append(5);
+        linklist.append(6);
+        linklist.insert(1, 1);
+        // linklist.insert(3, 3.1);
+        // console.log(linklist.length, linklist);
+        console.log(linklist.get(1));
+
+        console.log(linklist.indexof(6));
+        linklist.updata(3, 3.3);
+        linklist.removeAt(3);
+        linklist.remove(6);
+        console.log(linklist.length, linklist);
+        console.log(linklist.isEnpty());
+        console.log(linklist.size());
+        console.log(linklist.toString());
+    </script>
+</body>
+
+</html>

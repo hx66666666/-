@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<!-- <html lang="en"> -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Node {
+            constructor(data) {
+                this.pre = null;
+                this.data = data;
+                this.next = null;
+            }
+        }
+        class Dlinklist {
+            constructor() {
+                this.head = null;
+                this.tail = null;
+                this.length = 0;
+            }
+
+            append(data) {
+                let newnode = new Node(data);
+                if (this.length == 0) {
+                    this.head = newnode;
+                    this.tail = newnode;
+                    newnode.pre = this.head;
+                    this.length++;
+                } else {
+                    let flag = this.head;
+                    while (flag.next) {
+                        flag = flag.next;
+                    }
+                    flag.next = newnode;
+                    newnode.pre = flag;
+                    this.tail = newnode;
+                    this.length++;
+                }
+            }
+
+            insert(position, data) {
+                let newnode = new Node(data);
+                if (position < 0 || position > this.length) {
+                    return false;
+                } else if (position == 1) {
+                    this.head.pre = newnode;
+                    newnode.next = this.head;
+                    this.head = newnode;
+                    newnode.pre = this.head;
+                    this.length++;
+                } else {
+                    let previous = null;
+                    let current = this.head;
+                    let flag = 1;
+                    while (flag < position) {
+                        previous = current;
+                        current = current.next;
+                        flag++;
+                    }
+                    previous.next = newnode;
+                    newnode.pre = previous;
+                    newnode.next = current;
+                    current.pre = newnode;
+                    this.length++;
+                }
+            }
+
+            get(position) {
+                if (position < 0 || position > this.length) {
+                    return false;
+                } else {
+                    let flag = 1;
+                    let current = this.head;
+                    while (flag < position) {
+                        current = current.next;
+                        flag++;
+                    }
+                    return current;
+                }
+            }
+
+            indexOf(data) {
+                let previous = null;
+                let current = this.head;
+                let flag = 1;
+                while (current) {
+                    previous = current;
+                    current = current.next;
+                    if (previous.data == data) {
+                        return flag;
+                    }
+                    flag++;
+                }
+                return false;
+            }
+
+            updata(position, data) {
+                let previous = null;
+                let current = this.head;
+                let flag = 1;
+                while (flag < position) {
+                    previous = current;
+                    current = current.next;
+                    flag++;
+                }
+                current.data = data;
+            }
+
+            removeAt(position) {
+                if (position < 0 || position > this.length) {
+                    return false;
+                } else if (position == 1) {
+                    this.head = this.head.next;
+                    this.head.pre = this.head;
+                    this.length--;
+                } else {
+                    let previous = null;
+                    let current = this.head;
+                    let flag = 1;
+                    while (flag < position) {
+                        previous = current;
+                        current = current.next;
+                        flag++;
+                    }
+                    previous.next = current.next;
+                    if (current.next != null) {
+                        current.next.pre = previous;
+                    } else {
+                        this.tail = previous;
+                    }
+                    this.length--;
+                }
+            }
+
+            remove(data) {
+                let previous = null;
+                let current = this.head;
+                while (current) {
+                    previous = current;
+                    current = current.next;
+                    if (previous.data == data) {
+                        if (this.head.data == data) {
+                            this.head = previous.next;
+                            this.head.pre = this.head;
+                            this.length--;
+                        } else {
+                            previous.pre.next = previous.next;
+                            if (previous.next != null) {
+                                previous.next.pre = previous.pre;
+                            } else {
+                                this.tail = previous.next;
+                            }
+                            this.length--;
+                        }
+                        break;
+                    }
+                }
+                return false;
+            }
+
+            isEmpty() {
+                if (this.length) {
+                    return false;
+                } else {
+                    return false;
+                }
+            }
+
+            size() {
+                return this.length;
+            }
+
+            toString() {
+                let previous = null;
+                let current = this.head;
+                let flag = 0;
+                let str = '';
+                while (flag < this.length) {
+                    previous = current;
+                    current = current.next;
+                    str += previous.data + '';
+                    flag++;
+                }
+                return str;
+            }
+
+            backKwordString() {
+                let current = this.head;
+                while (current.next) {
+                    current = current.next;
+                }
+                let previous = current;
+                let str = '';
+                while(current.pre){
+                    previous = current;
+                    current = current.pre;
+                    str += previous.data;
+                    if(previous == this.head){
+                        break;
+                    }
+                }
+                return str;
+            }
+        }
+
+        let linklist = new Dlinklist;
+        linklist.append(1);
+        linklist.append(2);
+        linklist.append(3);
+        linklist.append(4);
+        linklist.append(5);
+
+        console.log(linklist);
+        // linklist.insert(1, 5.5);
+        console.log(linklist);
+        console.log(linklist.get(3))
+        console.log(linklist.indexOf(3));
+        // linklist.updata(4, 1.1);
+        // linklist.remove(1);
+        console.log(linklist);
+        console.log(linklist.toString());
+        console.log(linklist.backKwordString());
+    </script>
+</body>
+
+</html>

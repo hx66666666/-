@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Queue {
+            constructor() {
+                this.items = [];
+            }
+
+            //向队列尾部添加一个新的项
+            enqueue(element) {
+                this.items.push(element);
+            }
+
+            //移除队列的第一项，并返回被移除的元素
+            // dequeue(){
+            //     return this.itmes.shift();
+            // }
+            // Queue.prototype.dequeue = function(){
+            //     return this.items.shift();
+            // }
+
+            //返回队列的第一个元素
+            front() {
+                return this.items[0];
+            }
+
+            //队伍中是否包含元素
+            isEmpty() {
+                if (this.items.length) {
+                    return 'ture';
+                } else {
+                    return false;
+                }
+            }
+
+            //返回队伍中的元素个数
+            size() {
+                return this.items.length;
+            }
+
+            //将队伍中的元素转换为字符串
+            toString() {
+                let str = '';
+                for (let i = 0; i < this.items.length; i++) {
+                    str += '' + this.items[i];
+                }
+                return str;
+            }
+        };
+        //移除队列的第一项，并返回被移除的元素
+        Queue.prototype.dequeue = function () {
+            return this.items.shift();
+        };
+
+        // let myqueue = new Queue;
+        // myqueue.enqueue(1);
+        // myqueue.enqueue(2);
+        // myqueue.enqueue(3);
+        // console.log(myqueue.items);
+        // console.log(myqueue.toString());
+        // console.log(myqueue.size());
+        // console.log(myqueue.isEmpty());
+        // myqueue.dequeue();
+        // console.log(myqueue.items);
+        // console.log(myqueue.front());
+
+        // let arr = [1,2,3];
+        // arr.shift();
+        // console.log(arr);
+
+        //击鼓传花
+        let q = new Queue;
+        let jgch = function (m,n) {
+            for (let i = 0; i <= m; i++) {
+                q.enqueue(i);
+            };
+            console.log(q.items);
+            while (q.items.length != 1) {
+                let arr = 0;
+                for (let j = 0; j < n; j++) {
+                    arr = q.front();
+                    q.dequeue();
+                    if (j < n-1) {
+                        q.enqueue(arr);
+                    }
+                };
+            };
+        };
+        jgch(5,4);
+        console.log(q.items);
+    </script>
+</body>
+
+</html>
